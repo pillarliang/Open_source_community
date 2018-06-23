@@ -13,7 +13,7 @@ router.post('/dologin',async (ctx)=>{
     let password=ctx.request.body.password;
     var result=await DB.find('users',{"username":username,"password":tools.md5(password)});
     console.log(result);
-    if(result[0].charactor==1&&result[0].state==1){
+    if(result[0]&&result[0].state==1){
         //console.log('成功');
         console.log(result);
         ctx.session.userinfo=result[0];
