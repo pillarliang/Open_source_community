@@ -129,7 +129,7 @@ router.get("/code", async (ctx) => {      //---->127.0.0.1/api/v1/code/code?id=5
 });
 
 //添加收藏
-router.post("/code-collections", async (ctx) => {    
+router.post("/code-collections", async (ctx) => {
     try{
         let code_id =ctx.request.body.code_id;
         let user_id=ctx.request.body.user_id;

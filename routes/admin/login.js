@@ -15,7 +15,7 @@ router.post('/dologin',async (ctx)=>{
     console.log(result);
     if(result[0]&&result[0].state==1){
         //console.log('成功');
-        console.log(result);
+        // console.log(result);
         ctx.session.userinfo=result[0];
         ctx.redirect(ctx.state.__HOST__+'/admin');
     }else{

@@ -18,7 +18,7 @@ let codeSchema = new Schema({
     is_recommend:Number,    //----> 5/28新增（0->非推荐，1—>推荐）
     sort:Number,//------>5/28 新增 排序
     language:String,//--->6/4 新增开发语言
-    collection:Array,// 6/4 新增收藏，存放收藏用户的id
+    collections:Array,// 6/4 新增收藏，存放收藏用户的id
 
     //-----------以下名称换了---------------
     code_classify:{

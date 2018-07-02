@@ -1,5 +1,6 @@
 const router = require("koa-router")();
 const code= require("./api/code.js");
+const questions= require("./api/questions.js");
 const url = require("url");
 
 // router.use(async (ctx, next) => {
@@ -29,5 +30,6 @@ router.get("/", async (ctx) => {
 });
 
 router.use("/code", code);
+router.use("/questions", questions);
 
 module.exports = router.routes();

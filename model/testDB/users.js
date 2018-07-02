@@ -52,6 +52,10 @@ const UserSchema = new Schema({
     charactor:{
         type: Number,
         default: 0 //0-普通用户，1-管理员，2-游客
+    },
+    focus:{
+        type:array,
+        default:[]       //6/29新增
     }
 });
 
@@ -63,7 +67,7 @@ UserSchema.pre('save',async function(next){
     user.password = await bcrypt.hashAsync(user.password,salt);
     console.log(1,user.password);
     next();
-})
+});
 
 const User = mongoose.model('User', UserSchema);
 module.exports = User;

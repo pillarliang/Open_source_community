@@ -100,14 +100,14 @@ router.get("/blog-comments", async (ctx) => {
             blogCommentsArray.push(commentsArray[i]);
         }
     }
-    console.log(blogCommentsArray);
+    // console.log(blogCommentsArray);
 
     //根据评论的user_id找到所对应的用户
     var userName = [];
     for (let i = 0; i < blogCommentsArray.length; i++) {
         userName.push(await DB.find("users", {"_id": DB.getObjectId(blogCommentsArray[i].user_id)})); //userName为评论者的数组
     }
-    console.log(userName);
+    // console.log(userName);
 
     // let result = await DB.find("comments", {"": DB.getObjectId(id)}, {"comments": 1});
     // let userResult =await DB.find("users",{"_id":DB.getObjectId(result[0].uid})

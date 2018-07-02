@@ -13,6 +13,7 @@ let questionSchema = new Schema({
         required: true,
         unique: true
     },
+    user_id:Number,
     //----> 5/28新增（0->非热门，1—>热门）
     is_hot: Number,     //----> 5/28新增（0->非热门，1—>热门）
     is_recommend:Number,    //----> 5/28新增（0->非推荐，1—>推荐）
