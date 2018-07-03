@@ -57,8 +57,6 @@ class Db {
                 var sortJson={}
             }
 
-
-
         }else{
             console.log('传入参数错误')
         }
@@ -77,7 +75,7 @@ class Db {
             })
         })
     }
-
+    //json1:表示要匹配的文档，json2表示要把匹配到的文档更换成json2
     update(collectionName, json1, json2) {
         return new Promise((resolve, reject) => {
             this.connect().then((db) => {

@@ -56,15 +56,15 @@
         </div>
 
         <!--<div class="layui-form-item">-->
-        <!--<label for="L_state" class="layui-form-label">-->
-        <!--<span class="x-red">*</span>状态-->
-        <!--</label>-->
-        <!--<div class="layui-input-inline">-->
-        <!--<input type="radio" id="L_state1" name="state" required="" lay-verify="state" title="已审核"-->
-        <!--autocomplete="off" value="1" onclick="changeState(this)">-->
-        <!--<input type="radio" id="L_state2" name="state" required="" lay-verify="state" title="未审核"-->
-        <!--autocomplete="off" value="0" onclick="changeState(this)">-->
-        <!--</div>-->
+            <!--<label for="L_state" class="layui-form-label">-->
+                <!--<span class="x-red">*</span>状态-->
+            <!--</label>-->
+            <!--<div class="layui-input-inline">-->
+                <!--<input type="radio" id="L_state1" name="state" required="" lay-verify="state" title="已审核"-->
+                       <!--autocomplete="off" value="1" onclick="changeState(this)">-->
+                <!--<input type="radio" id="L_state2" name="state" required="" lay-verify="state" title="未审核"-->
+                       <!--autocomplete="off" value="0" onclick="changeState(this)">-->
+            <!--</div>-->
         <!--</div>-->
 
         <div class="layui-form-item">
@@ -94,8 +94,8 @@
                 }
             },
             sort: function (value) {
-                if (`{{sort}}`.indexOf(value) >= 0) {
-                    return value + '该排序数字已被占用，请重新选择一个数字';
+                if (`{{sort}}`.indexOf(value) > -1) {
+                    return '该排序数字已被占用，请重新选择一个数字';
                 }
             }
         });
@@ -105,11 +105,8 @@
             let title = document.getElementById("L_title").value;
             let url = document.getElementById("L_url").value;
             let sort = document.getElementById("L_sort").value;
-            console.log(title);
-            console.log(url);
-            console.log(sort);
 
-            $.ajax("{{__HOST__}}/admin/link/link-add", {
+            $.ajax("{{__HOST__}}/admin/unit/unit-add", {
                 type: "POST",
                 data: {"title": title, "url": url, "sort": sort},
                 success: (msg) => {

@@ -18,8 +18,7 @@ router.get("/", async (ctx) => {
 });
 
 router.get("/link-add", async (ctx) => {
-    let sort = await DB.find("nav", {});
-    // console.log(sort);
+    let sort = await DB.find("link", {});
     let sortArry = new Array();
     for (let i = 0; i < sort.length; i++) {
         sortArry[i] = sort[i].sort;
@@ -37,8 +36,7 @@ router.post("/link-add", async (ctx) => {
         console.log(title);
         console.log(url);
         console.log(sort);
-        // console.log(state);
-        let addResult = await await DB.insert("link", {
+        let addResult = await DB.insert("link", {
             "title": title,
             "url": url,
             "sort": parseInt(sort),
@@ -59,11 +57,12 @@ router.post("/link-add", async (ctx) => {
 
 
 router.get("/link-edit", async (ctx) => {
-    let sort = await DB.find("nav", {});
+    let sort = await DB.find("link", {});
     // console.log(sort);
     let sortArry = new Array();
     for (let i = 0; i < sort.length; i++) {
         sortArry[i] = sort[i].sort;
+        // console.log(sortArry[i]);
     }
     let id = ctx.query.id;
     let result = await DB.find("link", {"_id": DB.getObjectId(id)});
