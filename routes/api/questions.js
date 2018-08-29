@@ -147,17 +147,29 @@ router.get("/questions", async (ctx) => {      //---->127.0.0.1/api/v1/code/code
 //添加关注  用户之间：1:n
 router.post("/questions-focus", async (ctx) => {
     try {
-        let questionsUser_id = ctx.request.body.questionsUser_id;
-        let user_id = ctx.request.body.user_id;
+        let questionsUser_id = ctx.request.body.questionsUserid;
+        let user_id = ctx.request.body.userid;
+
+        // let questionsUser_id = ctx.query.questionsUserid;
+        // let user_id = ctx.query.userid;
+        console.log(user_id);
         let userResult = await DB.find("users", {"_id": DB.getObjectId(user_id)});
-        userResult.focus.push(questionsUser_id);
-        let addResult = await DB.update("users", {"_id": DB.getObjectId(user_id)}, {
-            "focus": userResult
-        });
-        ctx.body = {
-            code: 1,
-            message: "收藏成功",
-            data: {}
+        if (userResult[0].focus.indexOf(questionsUser_id)>-1){
+            ctx.body = {
+                code: 0,
+                message: "已经收藏",
+                data: {}
+            }
+        } else {
+            userResult[0].focus.push(questionsUser_id);
+            let addResult = await DB.update("users", {"_id": DB.getObjectId(user_id)}, {
+                "focus": userResult[0].focus
+            });
+            ctx.body = {
+                code: 1,
+                message: "收藏成功",
+                data: {}
+            }
         }
     } catch (e) {
         ctx.body = {
@@ -170,12 +182,17 @@ router.post("/questions-focus", async (ctx) => {
 //添加收藏
 router.post("/questions-collections", async (ctx) => {
     try {
-        let questions_id = ctx.request.body.questions_id;
-        let user_id = ctx.request.body.user_id;
+        let questions_id = ctx.request.body.questionsid;
+        let user_id = ctx.request.body.userid;
+        // let questions_id = ctx.query.questionsid;
+        // let user_id = ctx.query.userid;
+        console.log(questions_id);
+        console.log(user_id);
         //查询questions_collections集合中的user_id文档
         let collectionResult = await DB.find("questions_collections", {"user_id": user_id});
-        if (collectionResult.includes(questions_id)) {
-            collectionResult.questions_id.push(questions_id);
+        console.log(collectionResult);
+        if (collectionResult==[]||collectionResult[0].questions_id.indexOf(questions_id)<0) {
+            collectionResult[0].questions_id.push(questions_id);
             let addResult = await DB.update("questions_collections", {"user_id": user_id}, {
                 "collections": collectionResult
             });
@@ -185,9 +202,9 @@ router.post("/questions-collections", async (ctx) => {
                 data: {}
             }
         } else {
-            collectionResult.questions_id.remove(questions_id);
+            collectionResult[0].questions_id.remove(questions_id);
             let addResult = await DB.update("questions_collections", {"user_id": user_id}, {
-                "collections": collectionResult
+                "questions_id": collectionResult[0].questions_id
             });
             ctx.body = {
                 code: 1,
@@ -267,6 +284,11 @@ router.post("/questions-comments", async (ctx) => {
         let questions_id =ctx.request.body.questions_id; //该问题的id
         let user_id=ctx.request.body.user_id;  //登录用户的id，不是提问者的
         let content=ctx.request.body.content;  //回答的内容
+
+        // let questions_id =ctx.query.questions_id; //该问题的id
+        // let user_id=ctx.query.user_id;  //登录用户的id，不是提问者的
+        // let content=ctx.query.content;  //回答的内容
+
         let addResult = await DB.insert("questions_comments", {
             "questions_id": questions_id,
             "user_id": user_id,
