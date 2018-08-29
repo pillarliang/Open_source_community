@@ -1,0 +1,40 @@
+问答页面接口文档
+ 
+1.	（改）排列：最热，最新，推荐
+2.	所有标签：39.106.122.7:3000/api/v1/questions/questions-classify 
+3.	正文部分：
+a)	默认排列按最新：39.106.122.7:3000/api/v1/questions/questionslist 
+b)	最热：39.106.122.7:3000/api/v1/questions/questions-hot   
+c)	最新：39.106.122.7:3000/api/v1/questions/questionslist 
+d)	推荐： 39.106.122.7:3000/api/v1/questions/questions-recommend 
+e)	
+问答页面详情：
+39.106.122.7:3000/api/v1/questions/questions（get）
+例：39.106.122.7:3000/api/v1/questions/questions?id=5b0e9ad9fc0f8c0accd1ae7e（问答id）
+
+添加关注：（取消关注同样的地址）,关注指关注提问者。
+（post）
+（需要传的数据“questionsUserid”提出问题用户的id;“userid”登录用户的id;) 39.106.122.7:3000/api/v1/questions/questions-focus
+
+添加收藏：（取消关注同样的地址）,收藏指收藏该问题。
+39.106.122.7:3000/api/v1/questions/questions-collections  (post)
+（需要传的数据“questionsid” “userid”）
+
+获取提问者的其他提问：
+39.106.122.7:3000/api/v1/questions/otherquestions?id=    (id为问题的id)
+（例）39.106.122.7:3000/api/v1/questions/otherquestions?id=5b0e9ad9fc0f8c0accd1ae7e    
+
+获取问题的评论：
+39.106.122.7:3000/api/v1/questions/questions-comments    （get）
+（例）39.106.122.7:3000/api/v1/questions/questions-comments?id=5b0e9ad9fc0f8c0accd1ae7e 
+
+发表评论:
+39.106.122.7:3000/api/v1/questions/questions-comments     (post)
+(需要传的数据，“questions_id”—问题的id,“user_id”—登录者的id)
+
+友情链接;
+39.106.122.7:3000/api/v1/link     (get)
+
+合作单位：
+39.106.122.7:3000/api/v1/unit   (get)
+
